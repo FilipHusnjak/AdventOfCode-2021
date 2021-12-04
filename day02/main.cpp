@@ -9,17 +9,15 @@ auto &operator+=(std::pair<long, long> &left, const std::pair<long, long> &right
 
 auto first_part(const std::vector<std::pair<long, long>> &input) {
     std::pair<long, long> result;
-    for (const auto &i: input) {
+    for (const auto &i: input)
         result += i;
-    }
     return result.first * result.second;
 }
 
 auto second_part(const std::vector<std::pair<long, long>> &input) {
     std::pair<long, long> result;
-    for (long aim = 0; const auto &i: input) {
+    for (long aim = 0; const auto &i: input)
         result += {i.first, (aim += i.second) * i.first};
-    }
     return result.first * result.second;
 }
 
