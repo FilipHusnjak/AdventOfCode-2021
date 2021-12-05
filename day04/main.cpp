@@ -18,7 +18,7 @@ struct board {
     uint8_t columns[5]{};
 };
 
-auto calculate_min_max(const std::vector<int32_t> &nums, std::list<board> boards) {
+auto calculate_min_max(const std::vector<int32_t> &nums, std::list<board>& boards) {
     int32_t init_size = (int32_t) boards.size(), min_place = (int32_t) nums.size(), max_place = -1;
     auto min_b = boards.begin(), max_b = boards.begin();
     for (int32_t i = 0; i < nums.size(); i++) {
