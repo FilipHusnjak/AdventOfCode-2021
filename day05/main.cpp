@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <ranges>
 #include <algorithm>
+#include <chrono>
 
 #include "../common.h"
 
@@ -60,12 +61,18 @@ auto parse_boards() {
 }
 
 int main() {
+    auto start = std::chrono::high_resolution_clock::now();
+
     std::string line;
     std::cin >> line;
     auto nums = split(line, ',');
     auto boards = parse_boards();
 
     const auto &&[f, s] = calculate_min_max(nums, boards);
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() << std::endl;
 
     std::cout << "First part = " << f << std::endl;
     std::cout << "Second part = " << s << std::endl;
