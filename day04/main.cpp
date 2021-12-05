@@ -18,9 +18,10 @@ struct board {
     uint8_t columns[5]{};
 };
 
-auto calculate_min_max(const std::vector<int32_t> &nums, std::list<board>& boards) {
+auto calculate_min_max(const std::vector<int32_t> &nums, std::list<board> &boards) {
+    if (boards.empty()) return std::make_pair(0u, 0u);
     int32_t init_size = (int32_t) boards.size(), min_place = (int32_t) nums.size(), max_place = -1;
-    auto min_b = boards.begin(), max_b = boards.begin();
+    auto min_b = *boards.begin(), max_b = *boards.begin();
     for (int32_t i = 0; i < nums.size(); i++) {
         if (boards.empty()) break;
         for (auto it = boards.begin(); it != boards.end();) {
@@ -31,8 +32,8 @@ auto calculate_min_max(const std::vector<int32_t> &nums, std::list<board>& board
             it->score -= nums[i];
             auto &&[row, col] = it->m.at(nums[i]);
             if (!--it->rows[row] || !--it->columns[col]) {
-                min_b = boards.size() == init_size ? it : min_b;
-                max_b = boards.size() == 1 ? it : max_b;
+                min_b = boards.size() == init_size ? *it : min_b;
+                max_b = boards.size() == 1 ? *it : max_b;
                 min_place = std::min(min_place, i);
                 max_place = std::max(max_place, i);
                 it = boards.erase(it);
@@ -41,7 +42,7 @@ auto calculate_min_max(const std::vector<int32_t> &nums, std::list<board>& board
             }
         }
     }
-    return std::make_pair(min_b->score * nums[min_place], max_b->score * nums[max_place]);
+    return std::make_pair(min_b.score * nums[min_place], max_b.score * nums[max_place]);
 }
 
 auto parse_boards() {
@@ -62,7 +63,7 @@ auto parse_boards() {
 int main() {
     std::string line;
     std::cin >> line;
-    auto nums = split(line, ',');
+    auto nums = split<int32_t>(line, ",");
     auto boards = parse_boards();
 
     const auto &&[f, s] = calculate_min_max(nums, boards);
