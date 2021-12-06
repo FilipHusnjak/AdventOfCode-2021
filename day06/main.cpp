@@ -21,7 +21,7 @@ consteval auto get_states() {
 }
 
 template<size_t N>
-consteval auto preprocess() {
+consteval auto solve() {
     auto states = get_states();
     for (int32_t i = 0; i < N; i++) {
         auto next = states[0];
@@ -37,7 +37,7 @@ consteval auto preprocess() {
 }
 
 int main() {
-    static_assert(preprocess<80>() == 379414);
-    static_assert(preprocess<256>() == 1705008653296);
+    static_assert(solve<80>() == 379414);
+    static_assert(solve<256>() == 1705008653296);
     return 0;
 }
