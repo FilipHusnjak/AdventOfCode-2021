@@ -17,9 +17,9 @@ consteval auto count(auto f) {
     auto res = 0;
     for (auto &&i: input) {
         auto num = i - f > 0 ? i - f : f - i;
-        res += num * (num + 1) / 2;
+        res += num * (num + 1);
     }
-    return res;
+    return res >> 1;
 }
 
 consteval auto second_part() {
