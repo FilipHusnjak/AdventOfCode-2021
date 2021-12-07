@@ -3,7 +3,7 @@
 
 #include "input.h"
 
-consteval auto first_task() {
+consteval auto first_part() {
     auto cache = input;
     std::sort(cache.begin(), cache.end());
     auto amount = cache[cache.size() / 2];
@@ -22,7 +22,7 @@ consteval auto count(auto f) {
     return res;
 }
 
-consteval auto second_task() {
+consteval auto second_part() {
     auto low = 0;
     for (auto &&i: input)
         low += i;
@@ -31,7 +31,7 @@ consteval auto second_task() {
 }
 
 int main() {
-    static_assert(first_task() == 342641);
-    static_assert(second_task() == 93006301);
+    static_assert(first_part() == 342641);
+    static_assert(second_part() == 93006301);
     return 0;
 }
