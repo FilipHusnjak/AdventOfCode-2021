@@ -40,15 +40,12 @@ auto assign(auto &&nums, auto &&sorted, Args &&... args) {
 template<auto L, auto H, auto C, typename... Ignore>
 auto find_num(auto &&nums, auto &&part, Ignore &&... ignore) {
     for (auto i = L; i < H; i++) {
-        if constexpr(C == 1) {
+        if constexpr(C) {
             if (((i != ignore) && ...) && std::ranges::all_of(part, [&](auto &&el) { return nums[i].contains(el); }))
                 return i;
-        } else if constexpr(C == 2) {
+        } else {
             if (((i != ignore) && ...) &&
                 std::ranges::all_of(nums[i], [&](auto &&el) { return part.contains(el); }))
-                return i;
-        } else {
-            if (((i != ignore) && ...))
                 return i;
         }
     }
@@ -67,12 +64,12 @@ auto second_part() {
         const auto seven = 1;
         const auto four = 2;
         const auto eight = 9;
-        const auto three = find_num<3, 6, 1>(first, first[one]);
-        const auto nine = find_num<6, 9, 1>(first, first[four]);
-        const auto zero = find_num<6, 9, 1>(first, first[one], nine);
-        const auto five = find_num<3, 6, 2>(first, first[nine], three);
-        const auto two = find_num<3, 6, 0>(first, first[nine], three, five);
-        const auto six = find_num<6, 9, 1>(first, first[five], zero, nine);
+        const auto three = find_num<3, 6, true>(first, first[one]);
+        const auto nine = find_num<6, 9, true>(first, first[four]);
+        const auto zero = find_num<6, 9, true>(first, first[one], nine);
+        const auto five = find_num<3, 6, false>(first, first[nine], three);
+        const auto two = 12 - three - five;
+        const auto six = 21 - zero - nine;
 
         assign(nums, first, std::make_pair(zero, 0), std::make_pair(one, 1), std::make_pair(two, 2),
                std::make_pair(three, 3), std::make_pair(four, 4), std::make_pair(five, 5), std::make_pair(six, 6),
