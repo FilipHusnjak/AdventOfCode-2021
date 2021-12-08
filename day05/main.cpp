@@ -34,7 +34,7 @@ int64_t operator^(const point &l, const point &r) {
 
 namespace std {
     template<>
-    struct [[maybe_unused]] hash<point> {
+    struct [[maybe_unused]]  [[maybe_unused]] hash<point> {
         size_t operator()(const point &p) const {
             return (int64_t(p.first) << 32) + int64_t(p.second);
         }
