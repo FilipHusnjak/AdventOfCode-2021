@@ -20,7 +20,7 @@ std::pair<T, T> vector_to_pair(const std::vector<T> &v) {
     return {v[0], v[1]};
 }
 
-template <typename T = std::string_view>
+template<typename T = std::string_view>
 std::vector<T> split(const std::string_view &line, const std::string &c) {
     auto view = line | std::ranges::views::split(c) |
                 std::ranges::views::transform(
@@ -29,7 +29,7 @@ std::vector<T> split(const std::string_view &line, const std::string &c) {
     if constexpr (std::is_same_v<T, std::string_view>)
         return {view.begin(), view.end()};
     std::vector<T> res;
-    for (auto && v : view)
+    for (auto &&v: view)
         res.emplace_back(T(v.begin(), v.end()));
     return res;
 }
