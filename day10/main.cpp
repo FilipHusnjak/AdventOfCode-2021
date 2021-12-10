@@ -61,6 +61,5 @@ auto second_part() {
 int main() {
     std::cout << "First part: " << first_part() << std::endl;
     std::cout << "Second part: " << second_part() << std::endl;
-    std::cout << sizeof(long);
     return 0;
 }
