@@ -7,7 +7,7 @@
 #include <ranges>
 
 template<typename T>
-std::vector<T> split(const std::string &line, const std::string &c) {
+std::vector<T> split_num(const std::string_view &line, const std::string &c) {
     auto view = line | std::ranges::views::split(c) |
                 std::ranges::views::transform([](auto &&str) { return (T) std::strtol(&*str.begin(), nullptr, 10); }) |
                 std::ranges::views::common;
