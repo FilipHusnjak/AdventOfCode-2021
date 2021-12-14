@@ -63,7 +63,7 @@ auto parse_boards() {
 int main() {
     std::string line;
     std::cin >> line;
-    auto nums = split<int32_t>(line, ",");
+    auto nums = split_num<int32_t>(line, ",");
     auto boards = parse_boards();
 
     const auto &&[f, s] = calculate_min_max(nums, boards);

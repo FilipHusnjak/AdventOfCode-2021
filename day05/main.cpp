@@ -88,8 +88,8 @@ int main() {
     std::vector<segment> f_segments;
     std::vector<segment> s_segments;
     for (std::string p1, p2, arr; std::cin >> p1 >> arr >> p2;) {
-        auto &&pos1 = vector_to_pair(split<int64_t>(p1, ","));
-        auto &&pos2 = vector_to_pair(split<int64_t>(p2, ","));
+        auto &&pos1 = vector_to_pair(split_num<int64_t>(p1, ","));
+        auto &&pos2 = vector_to_pair(split_num<int64_t>(p2, ","));
         auto p_start = std::min(pos1, pos2);
         auto p_end = std::max(pos1, pos2);
         if (pos1.first == pos2.first || pos1.second == pos2.second) f_segments.emplace_back(p_start, p_end);
