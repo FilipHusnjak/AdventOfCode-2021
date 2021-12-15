@@ -19,6 +19,7 @@
 #include "day11/day11.h"
 #include "day12/day12.h"
 #include "day13/day13.h"
+#include "day14/day14.h"
 
 #define NUM_ITER 10
 
@@ -76,6 +77,7 @@ int main() {
     BENCHMARK(day11, NUM_ITER)
     BENCHMARK(day12, NUM_ITER)
     BENCHMARK(day13, NUM_ITER)
+    BENCHMARK(day14, NUM_ITER)
 
     std::cout << "Total: " << total << "ms\n";
 }
