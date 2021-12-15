@@ -3,16 +3,17 @@ project(AdventOfCode_2021)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(day01 day01/main.cpp)
-add_executable(day02 day02/main.cpp)
-add_executable(day03 day03/main.cpp)
-add_executable(day04 day04/main.cpp)
-add_executable(day05 day05/main.cpp)
-add_executable(day06 day06/main.cpp)
-add_executable(day07 day07/main.cpp)
-add_executable(day08 day08/main.cpp)
-add_executable(day09 day09/main.cpp)
-add_executable(day10 day10/main.cpp)
-add_executable(day11 day11/main.cpp)
-add_executable(day12 day12/main.cpp)
-add_executable(day13 day13/main.cpp)
+add_executable(benchmark benchmark.cpp common.cpp
+        day01/day01.cpp
+        day02/day02.cpp
+        day03/day03.cpp
+        day04/day04.cpp
+        day05/day05.cpp
+        day06/day06.cpp
+        day07/day07.cpp
+        day08/day08.cpp
+        day09/day09.cpp
+        day10/day10.cpp
+        day11/day11.cpp
+        day12/day12.cpp
+        day13/day13.cpp)

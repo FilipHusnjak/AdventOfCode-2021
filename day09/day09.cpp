@@ -1,9 +1,6 @@
-#include <iostream>
-#include <queue>
-#include <set>
+#include "day09.h"
 
-#include "input.h"
-#include "../common.h"
+#include <set>
 
 int32_t dir_y[] = {0, 0, 1, -1};
 int32_t dir_x[] = {1, -1, 0, 0};
@@ -17,18 +14,23 @@ auto is_low(auto &&m, auto start_y, auto start_x) {
     return true;
 }
 
-auto get_lows(auto &&m) {
-    std::vector<std::pair<int32_t, int32_t>> lows;
-    for (auto y = 0; y < m.size(); y++)
-        for (auto x = 0; x < m[y].size(); x++)
-            if (is_low(m, y, x)) lows.emplace_back(y, x);
-    return lows;
+day09::input_t day09::parse(const parse_t &input) {
+    input_t res(std::vector<std::vector<int>>(input.size(), std::vector<int>(input[0].size())), {});
+    for (auto y = 0; auto &&line: input) {
+        for (auto x = 0; auto &&s: line)
+            res.first[y][x++] = s - '0';
+        y++;
+    }
+    for (auto y = 0; y < res.first.size(); y++)
+        for (auto x = 0; x < res.first[y].size(); x++)
+            if (is_low(res.first, y, x)) res.second.emplace_back(y, x);
+    return res;
 }
 
-auto first_part(auto &&m, auto lows) {
+day09::output_t day09::first_part(const day09::input_t &input) {
     auto res = 0;
-    for (auto[y, x]: lows)
-        res += m[y][x] + 1;
+    for (auto[y, x]: input.second)
+        res += input.first[y][x] + 1;
     return res;
 }
 
@@ -52,11 +54,15 @@ auto dfs(auto &&m, auto &&visited, auto low_y, auto low_x, auto high) {
     return count;
 }
 
-auto second_part(auto &&m, auto lows, auto high) {
-    std::multiset<int32_t> best;
-    std::vector visited(m.size(), std::vector<int8_t>(m[0].size(), 0));
-    for (auto[y, x]: lows) {
-        auto cnt = dfs(m, visited, y, x, high);
+day09::output_t day09::second_part(const day09::input_t &input) {
+    int high = -1;
+    for (const auto &y: input.first)
+        for (int x: y)
+            high = std::max(high, x);
+    std::multiset<int> best;
+    std::vector visited(input.first.size(), std::vector<int8_t>(input.first[0].size(), 0));
+    for (auto[y, x]: input.second) {
+        auto cnt = dfs(input.first, visited, y, x, high);
         if (best.size() < 3) {
             best.insert(cnt);
         } else if (*best.begin() < cnt) {
@@ -70,21 +76,10 @@ auto second_part(auto &&m, auto lows, auto high) {
     return res;
 }
 
-int main() {
-    auto &&lines = split(input, "\n");
-    if (lines.empty()) return 0;
-    std::vector m(lines.size(), std::vector<int32_t>(lines[0].size()));
-    auto high = -1;
-    for (auto y = 0; auto &&line: lines) {
-        for (auto x = 0; auto &&s: line)
-            high = std::max(high, m[y][x++] = s - '0');
-        y++;
-    }
+day09::output_t day09::expected_p1() {
+    return 530;
+}
 
-    auto lows = get_lows(m);
-
-    std::cout << "First part = " << first_part(m, lows) << std::endl;
-    std::cout << "Second part = " << second_part(m, lows, high) << std::endl;
-
-    return 0;
+day09::output_t day09::expected_p2() {
+    return 1019494;
 }
