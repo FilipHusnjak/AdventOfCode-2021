@@ -17,4 +17,5 @@ add_executable(benchmark benchmark.cpp common.cpp
         day11/day11.cpp
         day12/day12.cpp
         day13/day13.cpp
-        day14/day14.cpp)
+        day14/day14.cpp
+        day15/day15.cpp)

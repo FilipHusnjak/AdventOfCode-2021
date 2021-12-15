@@ -20,8 +20,9 @@
 #include "day12/day12.h"
 #include "day13/day13.h"
 #include "day14/day14.h"
+#include "day15/day15.h"
 
-#define NUM_ITER 10
+#define NUM_ITER 1
 
 template<std::invocable Func>
 auto time(Func && f) {
@@ -57,12 +58,13 @@ auto total = 0.0;
     second_time /= (num_iter);     \
     auto second_res = day::second_part(parsing_res);\
     assert(second_res == day::expected_p2());\
-    std::cout << std::format("{} {:^8.4f} {:^8.4f} {:^8.4f} {:^8.4f}\n", #day, parsing_time, first_time, second_time, parsing_time + first_time + second_time); \
+    std::cout << std::format("| {} | {:^8.4f} | {:^8.4f} | {:^8.4f} | {:^8.4f} |\n", #day, parsing_time, first_time, second_time, parsing_time + first_time + second_time); \
     total += parsing_time + first_time + second_time;\
 }
 
 int main() {
-    std::cout << std::format("{:<5} {:^8} {:^8} {:^8} {:^8}   ms\n", "Day", "Parsing", "Part 1", "Part 2", "Sum");
+    std::cout
+            << std::format("| {:<5} | {:^8} | {:^8} | {:^8} | {:^8} |\n", "day", "parsing", "part_1", "part_2", "sum");
 
     BENCHMARK(day01, NUM_ITER)
     BENCHMARK(day02, NUM_ITER)
@@ -78,6 +80,7 @@ int main() {
     BENCHMARK(day12, NUM_ITER)
     BENCHMARK(day13, NUM_ITER)
     BENCHMARK(day14, NUM_ITER)
+    BENCHMARK(day15, NUM_ITER)
 
     std::cout << "Total: " << total << "ms\n";
 }
