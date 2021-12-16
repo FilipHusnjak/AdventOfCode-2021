@@ -21,8 +21,9 @@
 #include "day13/day13.h"
 #include "day14/day14.h"
 #include "day15/day15.h"
+#include "day16/day16.h"
 
-#define NUM_ITER 1
+#define NUM_ITER 10
 
 template<std::invocable Func>
 auto time(Func && f) {
@@ -81,6 +82,7 @@ int main() {
     BENCHMARK(day13, NUM_ITER)
     BENCHMARK(day14, NUM_ITER)
     BENCHMARK(day15, NUM_ITER)
+    BENCHMARK(day16, NUM_ITER)
 
     std::cout << "Total: " << total << "ms\n";
 }
